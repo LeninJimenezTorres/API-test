@@ -1,13 +1,20 @@
-const router = require('express').Router();
-const express = require('express');
-const http = require('http');
-require('dotenv').config();
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import { json, urlencoded } from 'express';
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+dotenv.config();
+import pkg from 'es6-request';
+const { request } = pkg;
+import {getJSON} from 'simple-get-json';
+import fetch from "node-fetch";
 
-const cors=require('cors');
-const path=require('path');
-const { json, urlencoded } = express;
-const jwt = require('jsonwebtoken');
+//const router = express.Router();
+import * as http from 'http'; 
 
+export const router = express.Router();
+router.use(express.json({type: '*/*'}));
 
 router.post('/',(req, res) => {
     const accessToken = req.header('GeneratedToken');
@@ -19,11 +26,7 @@ router.post('/',(req, res) => {
         else{
             let name = req.body.to;
             if(name){
-                msg={ 
-                    "message":"Hello "+name+" your message will be send", 
-                    description:'The process has been successful......!!!!',
-                    author: 'Lenin Jimenez Torres'};
-                res.status(201).json(msg);
+                res.json({"message":"Hello "+name+" your message will be send","description":'The process has been successful......!!!!',author: 'Lenin Jimenez Torres'});
             }
             else{
                 res.send('You need to send a Json http post body request with the attribute "to"');
@@ -32,4 +35,5 @@ router.post('/',(req, res) => {
     });
 });
 
-module.exports = router;
+//module.exports = router;
+export default router;
