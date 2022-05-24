@@ -11,10 +11,10 @@ const client = jwksClient({
   jwksUri: "http://localhost:8081/",
 });
 */
-test('test', async()=>{
-    const response = api.get('/').send();
-    console.log(response);
-    /*api
+test('test', ()=>{
+    //const response = api.get('/').send();
+    //console.log(response);
+    api
         .get('/')
-        .expect(201)'*/
+        .expect(201)
 });
